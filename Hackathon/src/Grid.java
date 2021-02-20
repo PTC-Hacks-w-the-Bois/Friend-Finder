@@ -11,8 +11,37 @@
 import java.awt.Color;
 import javax.swing.*;
 import java.util.Timer;
+import java.util.TimerTask;
 public class Grid extends javax.swing.JFrame {
-
+    
+    public void gridRefresh(int people, JButton[] buttons){
+    
+        for (int i = 0; i < 16; i++){
+            int Random = (int)(15 * Math.random() - 4);
+        
+            Random -= people;       
+        
+        /*if (Random >=0){
+        String txt = String.valueOf(Random);       
+        buttons[i].setText(txt);            
+        }
+        
+        else {
+            buttons[i].setText("0");
+        }
+       */ 
+            if (Random > 0 && Random <= 3){
+                buttons[i].setBackground(Color.green);
+            }
+            else if(Random > 3 && Random < 7){            
+                buttons[i].setBackground(Color.yellow);            
+            }
+            else if(Random >= 7 && Random < 11){        
+                buttons[i].setBackground(Color.red);            
+            }        
+            else buttons[i].setBackground(Color.white);
+       }
+    }
     
     public void clickMessage(JButton[] buttons, int btnNum){
         //output the name of the clicked button into an output panel;
@@ -218,36 +247,15 @@ public class Grid extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
        int people = Integer.parseInt(txtPeople.getText());
        JButton[] buttons  = {A1, B1, C1, D1, A2, B2, C2, D2, A3, B3, C3, D3, A4, B4, C4, D4};
-       
-       for (int i = 0; i < 16; i++){
-        int Random = (int)(15 * Math.random() - 4);
-        
-        Random -= people;       
-        
-        /*if (Random >=0){
-        String txt = String.valueOf(Random);       
-        buttons[i].setText(txt);            
+     
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask(){
+        public void run(){
+            gridRefresh(people, buttons);
         }
-        
-        else {
-            buttons[i].setText("0");
-        }
-       */ 
-        if (Random > 0 && Random <= 3){
-            
-            buttons[i].setBackground(Color.green);
-        }
-        else if(Random > 3 && Random < 7){            
-            buttons[i].setBackground(Color.yellow);            
-        }
-        else if(Random >= 7 && Random < 11){        
-            buttons[i].setBackground(Color.red);            
-        }        
-        else buttons[i].setBackground(Color.white);
-      
-            
-       }
-        
+    };
+       timer.scheduleAtFixedRate(task, 1000, 15000);
+
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void A1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A1ActionPerformed
