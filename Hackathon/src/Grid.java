@@ -205,7 +205,7 @@ public class Grid extends javax.swing.JFrame {
        int people = Integer.parseInt(txtPeople.getText());
        
        for (int i = 0; i < 16; i++){
-        int Random = (int)(15 * Math.random() - 4);
+        int Random = (int)(15 * Math.random() - 3);
         
         Random -= people;       
         
