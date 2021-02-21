@@ -13,38 +13,55 @@ import javax.swing.*;
 import java.util.Timer;
 import java.util.TimerTask;
 public class Grid extends javax.swing.JFrame {
-public static int people = SplashPage.people;
+public int group = SplashPage.people;
 public static String[] btnValues;      
-public void gridRefresh(int people, JButton[] buttons){
+
+    public void gridRefresh(int group, JButton[] buttons){
     
-    
-        for (int i = 0; i < 16; i++){
-            int Random;
+            for (int i = 0; i < 16; i++){
+            int existPpl;
             
             if(cbxCities.getSelectedItem().equals("Toronto")){
-                Random = (int)(20 * Math.random() - 9);
+                existPpl = (int)(20 * Math.random() - 9);
             }else if(cbxCities.getSelectedItem().equals("Ottawa")){
-                Random = (int)(15 * Math.random() - 4);
+                existPpl = (int)(15 * Math.random() - 4);
             }else {
-                Random = (int)(11 * Math.random());
+                existPpl = (int)(11 * Math.random());
             }     
                   
-            if (Random <0 || Random >=10){
-            Random = 0;
+            if (existPpl < 0 || existPpl >=10){
+            existPpl = 0;
             }
-            int dif = 10-Random;
-            if(dif > 0 && dif<=3){
-                 buttons[i].setBackground(Color.red);
-            }else if(dif >=4 && dif<=6){
-                 buttons[i].setBackground(Color.yellow);
-            }else if (dif >=7 && dif<=9){
-                 buttons[i].setBackground(Color.green);
-            }else
-                 buttons[i].setBackground(Color.white);
-            if(dif < people){
-                buttons[i].setBackground(Color.white);
-            }
+            buttons[i].setText(String.valueOf(existPpl));
             
+            //setting button background color
+            if(existPpl + group >= 10 || existPpl == 0){
+                buttons[i].setBackground(Color.white);
+                buttons[i].setForeground(Color.white);
+            }
+            if(10-existPpl >= group){
+                int emptySpots = 10-(existPpl+group);
+                if((existPpl + group) >= 10 || existPpl == 0){
+                    buttons[i].setBackground(Color.white);
+                    buttons[i].setForeground(Color.white);
+                }
+                else if(emptySpots > 0 && emptySpots <= 3){
+                    buttons[i].setBackground(Color.red);
+                    buttons[i].setForeground(Color.red);
+                }
+                else if(emptySpots <= 6 && emptySpots >= 4){
+                    buttons[i].setBackground(Color.yellow);
+                    buttons[i].setForeground(Color.yellow);
+                }
+                else if(emptySpots >= 7 && emptySpots <= 9){
+                    buttons[i].setBackground(Color.green);
+                    buttons[i].setForeground(Color.green);
+                }
+            }
+            else{//button will be white because the total number of people is over 10, which you can't travel there
+                buttons[i].setBackground(Color.white);
+                buttons[i].setForeground(Color.white);
+            }
             /*
             if (Random > 0 && Random <= 3){
                 buttons[i].setBackground(Color.green);
@@ -54,8 +71,6 @@ public void gridRefresh(int people, JButton[] buttons){
                 buttons[i].setBackground(Color.red);            
             }else buttons[i].setBackground(Color.white);
             */
-         
-            buttons[i].setText(String.valueOf(Random));
        }    
     }
     
@@ -96,7 +111,6 @@ public void gridRefresh(int people, JButton[] buttons){
         A2 = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
         cbxCities = new javax.swing.JComboBox<>();
-        lblNameOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -223,61 +237,54 @@ public void gridRefresh(int people, JButton[] buttons){
         cbxCities.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         cbxCities.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toronto", "Ottawa", "Guelph" }));
 
-        lblNameOutput.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(A1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(A1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(C4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(C3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(D3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(C2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(D2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(B1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(A2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(A3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(B3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(B2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnStart)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cbxCities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(C1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(C4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(D1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(C3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(D3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(C2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(D2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(lblNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(284, Short.MAX_VALUE))
+                        .addComponent(btnStart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbxCities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,9 +293,7 @@ public void gridRefresh(int people, JButton[] buttons){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStart)
                     .addComponent(cbxCities, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(lblNameOutput, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,17 +320,22 @@ public void gridRefresh(int people, JButton[] buttons){
                     .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
     public void buttonClicked(JButton btn, String btnName){
-        if( Integer.parseInt(btn.getText()) == 0){
-            JOptionPane.showMessageDialog(null, "You can't meet here.");
-        }else{
-        JOptionPane.showMessageDialog(null, "This location has a group of "+ btn.getText() +".", "This location is " + btnName , JOptionPane.PLAIN_MESSAGE);
+                
+        if(Integer.parseInt(btn.getText()) + group >= 11){
+            JOptionPane.showMessageDialog(null, "You can't meet here, there will be too many people.");
+        }
+        else if(Integer.parseInt(btn.getText()) == 0){
+            JOptionPane.showMessageDialog(null, "No one is at this location, you can't meet here.");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "This location has a group of "+ btn.getText() +". You can meet people here.", "This location is " + btnName , JOptionPane.PLAIN_MESSAGE);
         }
     }
     
@@ -340,7 +350,7 @@ public void gridRefresh(int people, JButton[] buttons){
         Timer timer = new Timer();
         TimerTask task = new TimerTask(){
         public void run(){
-            gridRefresh(people, buttons);
+            gridRefresh(group, buttons);
         }
     };
        timer.scheduleAtFixedRate(task, 1, 5000);
@@ -466,6 +476,5 @@ public void gridRefresh(int people, JButton[] buttons){
     private javax.swing.JButton D4;
     private javax.swing.JButton btnStart;
     private javax.swing.JComboBox<String> cbxCities;
-    private javax.swing.JLabel lblNameOutput;
     // End of variables declaration//GEN-END:variables
 }
