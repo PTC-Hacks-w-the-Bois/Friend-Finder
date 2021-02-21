@@ -9,9 +9,11 @@
  * @author abhis
  */
 import javax.swing.JOptionPane;
-public class SplashPage extends javax.swing.JFrame {
 
-    /**
+public class SplashPage extends javax.swing.JFrame {
+public static int people;
+public  String name;
+  /**
      * Creates new form SplashPage
      */
     public SplashPage() {
@@ -29,7 +31,6 @@ public class SplashPage extends javax.swing.JFrame {
 
         lblOutput = new javax.swing.JLabel();
         lblIntro = new javax.swing.JLabel();
-        btnCont = new javax.swing.JButton();
         btnInfo = new javax.swing.JButton();
         btnQuit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -39,17 +40,11 @@ public class SplashPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        btnConfirm = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblIntro.setText("Welcome to the Friend Finder! please select an option");
-
-        btnCont.setText("Continue");
-        btnCont.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContActionPerformed(evt);
-            }
-        });
 
         btnInfo.setText("Info");
         btnInfo.addActionListener(new java.awt.event.ActionListener() {
@@ -75,25 +70,25 @@ public class SplashPage extends javax.swing.JFrame {
 
         jLabel3.setText("Note: please remember to wear a mask when you meet people!");
 
+        btnConfirm.setText("Confirm");
+        btnConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(373, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(296, 296, 296))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCont)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnInfo)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnQuit)))
+                        .addComponent(jLabel3)
                         .addGap(77, 77, 77))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(133, 133, 133)
@@ -108,6 +103,14 @@ public class SplashPage extends javax.swing.JFrame {
                         .addGap(75, 75, 75)
                         .addComponent(jLabel2)))
                 .addContainerGap(171, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnConfirm)
+                .addGap(18, 18, 18)
+                .addComponent(btnInfo)
+                .addGap(18, 18, 18)
+                .addComponent(btnQuit)
+                .addGap(131, 131, 131))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,23 +129,16 @@ public class SplashPage extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCont)
                     .addComponent(btnInfo)
-                    .addComponent(btnQuit))
-                .addGap(32, 32, 32))
+                    .addComponent(btnQuit)
+                    .addComponent(btnConfirm))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new Grid().setVisible(true);
-        
-    }//GEN-LAST:event_btnContActionPerformed
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         // TODO add your handling code here:
@@ -157,9 +153,29 @@ public class SplashPage extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnQuitActionPerformed
 
+    private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
+        // TODO add your handling code here:
+        
+        if (txtName.getText().equals("") || Integer.parseInt(txtPpl.getText())<=0){
+            JOptionPane.showMessageDialog(null, "Your input is invalid");
+        }
+        else if (!txtName.getText().equals("") || Integer.parseInt(txtPpl.getText())>0){ 
+        people = Integer.parseInt(txtPpl.getText());
+        name = txtName.getText();
+        int reply = JOptionPane.showConfirmDialog(null,"Hello, "+ name + ". You are a group of "+people);
+       
+        if (reply == JOptionPane.YES_OPTION){
+        this.setVisible(false);    
+        new Grid().setVisible(true);
+        }
+        }
+    }//GEN-LAST:event_btnConfirmActionPerformed
+    
+    
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -188,12 +204,13 @@ public class SplashPage extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SplashPage().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCont;
+    private javax.swing.JButton btnConfirm;
     private javax.swing.JButton btnInfo;
     private javax.swing.JButton btnQuit;
     private javax.swing.JLabel jLabel1;
