@@ -14,42 +14,49 @@ import java.util.Timer;
 import java.util.TimerTask;
 public class Grid extends javax.swing.JFrame {
 public static int people = SplashPage.people;
-    public void gridRefresh(int people, JButton[] buttons){
+public static String[] btnValues;      
+public void gridRefresh(int people, JButton[] buttons){
+    
     
         for (int i = 0; i < 16; i++){
             int Random;
             
             if(cbxCities.getSelectedItem().equals("Toronto")){
-
                 Random = (int)(20 * Math.random() - 9);
-
-            }
-            else if(cbxCities.getSelectedItem().equals("Ottawa")){
-
+            }else if(cbxCities.getSelectedItem().equals("Ottawa")){
                 Random = (int)(15 * Math.random() - 4);
-            }
-            else {
-
+            }else {
                 Random = (int)(11 * Math.random());
+            }     
+                  
+            if (Random <0 || Random >=10){
+            Random = 0;
+            }
+            int dif = 10-Random;
+            if(dif > 0 && dif<=3){
+                 buttons[i].setBackground(Color.red);
+            }else if(dif >=4 && dif<=6){
+                 buttons[i].setBackground(Color.yellow);
+            }else if (dif >=7 && dif<=9){
+                 buttons[i].setBackground(Color.green);
+            }else
+                 buttons[i].setBackground(Color.white);
+            if(dif < people){
+                buttons[i].setBackground(Color.white);
             }
             
- 
-            Random -= people;       
-            if (Random <0){
-            Random = 0;
-        }
+            /*
             if (Random > 0 && Random <= 3){
                 buttons[i].setBackground(Color.green);
-            }
-            else if(Random > 3 && Random < 7){            
+            }else if(Random > 3 && Random < 7){            
                 buttons[i].setBackground(Color.yellow);            
-            }
-            else if(Random >= 7 && Random < 11){        
+            }else if(Random >= 7 && Random < 10){        
                 buttons[i].setBackground(Color.red);            
-            }        
-            else buttons[i].setBackground(Color.white);
+            }else buttons[i].setBackground(Color.white);
+            */
+         
             buttons[i].setText(String.valueOf(Random));
-       }
+       }    
     }
     
     public void clickMessage(JButton[] buttons, int btnNum){
@@ -60,7 +67,6 @@ public static int people = SplashPage.people;
     
     public Grid() {
         initComponents();
-
     }
 
     /**
@@ -94,36 +100,119 @@ public static int people = SplashPage.people;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        C2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        C2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C2ActionPerformed(evt);
+            }
+        });
+
+        A1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         A1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 A1ActionPerformed(evt);
             }
         });
 
+        A4.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        A4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                A4ActionPerformed(evt);
+            }
+        });
+
+        D2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        D2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                D2ActionPerformed(evt);
+            }
+        });
+
+        B1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         B1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 B1ActionPerformed(evt);
             }
         });
 
+        B4.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        B4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B4ActionPerformed(evt);
+            }
+        });
+
+        A3.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        A3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                A3ActionPerformed(evt);
+            }
+        });
+
+        C1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         C1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 C1ActionPerformed(evt);
             }
         });
 
+        C4.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        C4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C4ActionPerformed(evt);
+            }
+        });
+
+        B3.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        B3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B3ActionPerformed(evt);
+            }
+        });
+
+        D1.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         D1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 D1ActionPerformed(evt);
             }
         });
 
+        D4.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         D4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 D4ActionPerformed(evt);
             }
         });
 
+        D3.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        D3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                D3ActionPerformed(evt);
+            }
+        });
+
+        B2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        B2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                B2ActionPerformed(evt);
+            }
+        });
+
+        C3.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        C3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                C3ActionPerformed(evt);
+            }
+        });
+
+        A2.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
+        A2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                A2ActionPerformed(evt);
+            }
+        });
+
+        btnStart.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         btnStart.setText("Start");
         btnStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,7 +220,10 @@ public static int people = SplashPage.people;
             }
         });
 
+        cbxCities.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
         cbxCities.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toronto", "Ottawa", "Guelph" }));
+
+        lblNameOutput.setFont(new java.awt.Font("Comic Sans MS", 0, 11)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -223,19 +315,26 @@ public static int people = SplashPage.people;
                     .addComponent(D4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(B4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(A4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    public void buttonClicked(JButton btn, String btnName){
+        if( Integer.parseInt(btn.getText()) == 0){
+            JOptionPane.showMessageDialog(null, "You can't meet here.");
+        }else{
+        JOptionPane.showMessageDialog(null, "This location has a group of "+ btn.getText() +".", "This location is " + btnName , JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+    
     private void B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B1ActionPerformed
-        
+        buttonClicked(B1, "B1");
     }//GEN-LAST:event_B1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
        
-        
        JButton[] buttons  = {A1, B1, C1, D1, A2, B2, C2, D2, A3, B3, C3, D3, A4, B4, C4, D4};
      
         Timer timer = new Timer();
@@ -252,20 +351,64 @@ public static int people = SplashPage.people;
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void A1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A1ActionPerformed
-        
+        buttonClicked(A1, "A1");
     }//GEN-LAST:event_A1ActionPerformed
 
     private void C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C1ActionPerformed
-        // TODO add your handling code here:
+        buttonClicked(C1, "C1");
     }//GEN-LAST:event_C1ActionPerformed
 
     private void D1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_D1ActionPerformed
-        // TODO add your handling code here:
+        buttonClicked(D1, "D1");
     }//GEN-LAST:event_D1ActionPerformed
 
     private void D4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_D4ActionPerformed
-        // TODO add your handling code here:
+        buttonClicked(D4, "D4");
     }//GEN-LAST:event_D4ActionPerformed
+
+    private void A2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A2ActionPerformed
+        buttonClicked(A2, "A2");
+    }//GEN-LAST:event_A2ActionPerformed
+
+    private void B2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B2ActionPerformed
+        buttonClicked(B2, "B2");
+    }//GEN-LAST:event_B2ActionPerformed
+
+    private void C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C2ActionPerformed
+       buttonClicked(C2, "C2");
+    }//GEN-LAST:event_C2ActionPerformed
+
+    private void D2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_D2ActionPerformed
+        buttonClicked(D2, "D2");
+    }//GEN-LAST:event_D2ActionPerformed
+
+    private void A3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A3ActionPerformed
+        buttonClicked(A3, "A3");
+    }//GEN-LAST:event_A3ActionPerformed
+
+    private void B3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B3ActionPerformed
+        buttonClicked(B3, "B3");
+    }//GEN-LAST:event_B3ActionPerformed
+
+    private void C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C3ActionPerformed
+        buttonClicked(C3, "C3");
+    }//GEN-LAST:event_C3ActionPerformed
+
+    private void D3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_D3ActionPerformed
+        buttonClicked(D3, "D3");
+    }//GEN-LAST:event_D3ActionPerformed
+
+    private void A4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A4ActionPerformed
+        buttonClicked(A4, "A4");
+    }//GEN-LAST:event_A4ActionPerformed
+
+    private void B4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_B4ActionPerformed
+        buttonClicked(B4, "B4");
+    }//GEN-LAST:event_B4ActionPerformed
+
+    private void C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_C4ActionPerformed
+        buttonClicked(C4, "C4");
+    }//GEN-LAST:event_C4ActionPerformed
 
     /**
      * @param args the command line arguments
